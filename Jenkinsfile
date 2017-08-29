@@ -11,6 +11,10 @@ node{
     stage 'get dependencies'
     sh 'npm install'
 
+    // rum all unit tests
+    stage 'Unit test'
+    sh 'npm test'
+
 
 }
 
