@@ -1,10 +1,12 @@
 
-stage 'CI'
 
+
+
+stage 'CI'
 node {
 
-    git branch: 'master', 
-        url: 'https://github.com/nagabhushanamn/solitaire-systemjs-course'
+    git branch: 'jenkins2-course', 
+        url: 'https://github.com/g0t4/solitaire-systemjs-course'
 
     // pull dependencies from npm
     // on windows use: bat 'npm install'
@@ -19,11 +21,19 @@ node {
     
     // test with PhantomJS for "fast" "generic" results
     // on windows use: bat 'npm run test-single-run -- --browsers PhantomJS'
-    sh 'npm run test-single-run -- --browsers Chrome'
-    sh 'npm run test-single-run -- --browsers Firefox'
+    sh 'npm run test-single-run -- --browsers PhantomJS'
     
     // archive karma test results (karma is configured to export junit xml files)
     step([$class: 'JUnitResultArchiver', 
-          testResults: 'test-results/**/*.xml'])
+          testResults: 'test-results/**/test-results.xml'])
           
+}
+
+def notify(status){
+    emailext (
+      to: "wesmdemos@gmail.com",
+      subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+    )
 }
