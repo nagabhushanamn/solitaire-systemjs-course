@@ -14,6 +14,8 @@ node{
     // rum all unit tests
     stage 'Unit test'
     sh 'npm run test-single-run -- --browsers Chrome'
+    sh 'npm run test-single-run -- --browsers Firefox'
+    
 
 
 }
