@@ -5,7 +5,7 @@ describe("A card", function () {
     expect(new Card({rank: "King", suit: "Spades"}).image).toBe("6.png");
     expect(new Card({rank: "8", suit: "Hearts"}).image).toBe("27.png");
     expect(new Card({rank: "Ace", suit: "Diamonds"}).image).toBe("4.png");
-    expect(new Card({rank: "2", suit: "Clubs"}).image).toBe("49.png");
+    expect(new Card({rank: "20", suit: "Clubs"}).image).toBe("49.png");
   });
 
   it("should map its color to black or red based on suit", function () {
